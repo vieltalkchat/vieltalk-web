@@ -1,9 +1,10 @@
-"use client";
+'use client'
 
-import { Provider } from "jotai";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ProgressProvider } from "@bprogress/next/app";
-import { useMediaQuery } from "@/hooks";
+import { Provider } from 'jotai'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ProgressProvider } from '@bprogress/next/app'
+import { useMediaQuery } from '@/hooks'
+import { store } from '@/store'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,30 +16,30 @@ export const queryClient = new QueryClient({
       staleTime: Infinity,
     },
   },
-});
+})
 
 export function JotaiProviders({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <Provider>
+    <Provider store={store}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </Provider>
-  );
+  )
 }
 
 export function ClientConfigProvider({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  useMediaQuery();
+  useMediaQuery()
 
   return (
     <ProgressProvider height="4px" color="hsl(var(--primary, black))" options={{ showSpinner: false }} shallowRouting>
       {children}
     </ProgressProvider>
-  );
+  )
 }

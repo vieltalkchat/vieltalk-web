@@ -1,1 +1,5 @@
-export * from "./common";
+import { createStore } from 'jotai'
+
+export const store = createStore()
+
+export * from './common'
